@@ -13,13 +13,14 @@ import List from "../component/list/List";
 // Styles
 import styles from "./Dashboard.module.css";
 import Card from "../component/card/Card";
-//console.log(mockData.results.length)
+
+
 const Dashboard = () => {
-  const [currency, setCurrency] = useState("EUR");
+  const [currency, setCurrency] = useState("USD");
   const [searchText, setSearchText] = useState("");
   const [selectedOrderDetails, setSelectedOrderDetails] = useState({});
   const [selectedOrderTimeStamps, setSelectedOrderTimeStamps] = useState({});
-
+  const p=Object.keys(mockData.results[0].bestExecutionData.orderVolume);
   return (
     <div>
       <div className={styles.header}>
@@ -30,8 +31,10 @@ const Dashboard = () => {
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
+         
           <Dropdown
-            options={["GBP", "USD", "JPY", "EUR"]}
+            // options={["GBP", "USD", "JPY", "EUR"]}
+            options={[...p]}
             onChange={(e) => setCurrency(e.target.value)}
             selectedItem={currency}
           />
@@ -48,7 +51,7 @@ const Dashboard = () => {
             title="Selected Order Timestamps"
           />
         </div>
-        <List rows={mockData.results} timeStampsData={timestamps.results} />
+        <List rows={mockData.results} timeStampsData={timestamps.results} selectedCurrency={currency}/>
       </div>
     </div>
   );
