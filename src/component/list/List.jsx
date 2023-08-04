@@ -6,7 +6,7 @@ import ListHeaderCell from "./ListHeaderCell";
 
 import styles from "./List.module.css";
 
-const List = ({ rows, timeStampsData, selectedCurrency, mySearch }) => {
+const List = ({ rows, timeStampsData, selectedCurrency, mySearch, setOrder,setTime }) => {
   //4 adding search feature on the order IDs 
   const searchData = rows.filter((row) => {
     return row["&id"].includes(mySearch);
@@ -31,10 +31,10 @@ const List = ({ rows, timeStampsData, selectedCurrency, mySearch }) => {
             /*2. adding orderSubmitted to the table */
           }
           const p = timeStampsData.find((data) => row["&id"] === data["&id"]);
-         
+       
           return (
-            <ListRow key={count++}>
-              <ListRowCell>{row["&id"]} </ListRowCell>
+            <ListRow key={count++} setOrder={setOrder} row1={row.executionDetails} setTime={setTime} time1={p.timestamps}>
+              <ListRowCell>{row["&id"]}</ListRowCell>
               <ListRowCell>{row.executionDetails.buySellIndicator}</ListRowCell>
               <ListRowCell>{row.executionDetails.orderStatus}</ListRowCell>
               <ListRowCell>{p.timestamps.orderSubmitted}</ListRowCell>

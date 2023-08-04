@@ -21,7 +21,7 @@ const Dashboard = () => {
   const [selectedOrderDetails, setSelectedOrderDetails] = useState({});
   const [selectedOrderTimeStamps, setSelectedOrderTimeStamps] = useState({});
   const p=Object.keys(mockData.results[0].bestExecutionData.orderVolume);
-  
+ 
   return (
     <div>
       <div className={styles.header}>
@@ -44,15 +44,17 @@ const Dashboard = () => {
       <div className={styles.content}>
         <div className={styles.section}>
           <Card
+          
             cardData={selectedOrderDetails}
             title="Selected Order Details"
           />
           <Card
+          
             cardData={selectedOrderTimeStamps}
             title="Selected Order Timestamps"
           />
         </div>
-        <List rows={mockData.results} timeStampsData={timestamps.results} selectedCurrency={currency} mySearch={searchText}/>
+        <List rows={mockData.results} timeStampsData={timestamps.results} selectedCurrency={currency} mySearch={searchText} setOrder={ setSelectedOrderDetails} setTime={setSelectedOrderTimeStamps}/>
       </div>
     </div>
   );
