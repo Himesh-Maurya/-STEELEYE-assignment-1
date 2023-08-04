@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {  useState } from "react";
 
 // Data
 import mockData from "../assets/data.json";
@@ -21,6 +21,7 @@ const Dashboard = () => {
   const [selectedOrderDetails, setSelectedOrderDetails] = useState({});
   const [selectedOrderTimeStamps, setSelectedOrderTimeStamps] = useState({});
   const p=Object.keys(mockData.results[0].bestExecutionData.orderVolume);
+  
   return (
     <div>
       <div className={styles.header}>
@@ -51,7 +52,7 @@ const Dashboard = () => {
             title="Selected Order Timestamps"
           />
         </div>
-        <List rows={mockData.results} timeStampsData={timestamps.results} selectedCurrency={currency}/>
+        <List rows={mockData.results} timeStampsData={timestamps.results} selectedCurrency={currency} mySearch={searchText}/>
       </div>
     </div>
   );

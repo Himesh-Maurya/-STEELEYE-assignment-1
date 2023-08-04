@@ -6,7 +6,12 @@ import ListHeaderCell from "./ListHeaderCell";
 
 import styles from "./List.module.css";
 
-const List = ({ rows,timeStampsData,selectedCurrency}) => {
+const List = ({ rows, timeStampsData, selectedCurrency, mySearch }) => {
+  //4 adding search feature on the order IDs 
+  const searchData = rows.filter((row) => {
+    return row["&id"].includes(mySearch);
+  });
+  console.log("Filtering:", searchData);
   return (
     <table className={styles.container}>
       <thead>
@@ -19,25 +24,26 @@ const List = ({ rows,timeStampsData,selectedCurrency}) => {
         </ListHeader>
       </thead>
       <tbody>
-
-  {rows.map((row) => {
-{/*2. adding orderSubmitted to the table */}
-    const p = timeStampsData.find(
-      (data) => row["&id"] === data["&id"]
-    );
-   
-    return (
-      <ListRow key={row["&id"]}>
-        <ListRowCell>{row["&id"]}</ListRowCell>
-        <ListRowCell>{row.executionDetails.buySellIndicator}</ListRowCell>
-        <ListRowCell>{row.executionDetails.orderStatus}</ListRowCell>
-        <ListRowCell>{p.timestamps.orderSubmitted}</ListRowCell>
-        {/*3 displaying the the currency value */}
-        <ListRowCell>{row.bestExecutionData.orderVolume[selectedCurrency]}</ListRowCell>
-      </ListRow>
-    );
-  })}
-</tbody>
+        {searchData .map((row) => {
+          {
+            /*2. adding orderSubmitted to the table */
+          }
+          const p = timeStampsData.find((data) => row["&id"] === data["&id"]);
+         
+          return (
+            <ListRow>
+              <ListRowCell>{row["&id"]} </ListRowCell>
+              <ListRowCell>{row.executionDetails.buySellIndicator}</ListRowCell>
+              <ListRowCell>{row.executionDetails.orderStatus}</ListRowCell>
+              <ListRowCell>{p.timestamps.orderSubmitted}</ListRowCell>
+              {/*3 displaying the the currency value */}
+              <ListRowCell>
+                {row.bestExecutionData.orderVolume[selectedCurrency]}
+              </ListRowCell>
+            </ListRow>
+          );
+        })}
+      </tbody>
     </table>
   );
 };
