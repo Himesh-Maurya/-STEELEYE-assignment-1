@@ -11,7 +11,9 @@ const List = ({ rows, timeStampsData, selectedCurrency, mySearch }) => {
   const searchData = rows.filter((row) => {
     return row["&id"].includes(mySearch);
   });
-  console.log("Filtering:", searchData);
+ let count=0;
+  
+ 
   return (
     <table className={styles.container}>
       <thead>
@@ -31,7 +33,7 @@ const List = ({ rows, timeStampsData, selectedCurrency, mySearch }) => {
           const p = timeStampsData.find((data) => row["&id"] === data["&id"]);
          
           return (
-            <ListRow>
+            <ListRow key={count++}>
               <ListRowCell>{row["&id"]} </ListRowCell>
               <ListRowCell>{row.executionDetails.buySellIndicator}</ListRowCell>
               <ListRowCell>{row.executionDetails.orderStatus}</ListRowCell>
